@@ -1,22 +1,56 @@
 <html>
     <p>这是一个arishem的表单</p>
-    <form action="/arishem/post/">
-        <input name="number1" class="number"></input>
-        <select name="expr">
-          <option value="plus">+</option>
-          <option value="minus">-</option>
-          <option value="multiple">*</option>
-          <option value="divided">/</option>
-        </select>
-        <input name="number2" class="number"></input>
-        <select name="operator">
-          <option value="equal">==</option>
-          <option value="greater">></option>
-          <option value="less"><</option>
-        </select>
-        <input name="result" class="number"></input>
-        <input type="submit" value="提交">
+    <form id="arishemForm">
+      <input name="number1" class="number"></input>
+      <select name="expr">
+        <option value="plus">+</option>
+        <option value="minus">-</option>
+        <option value="multiple">*</option>
+        <option value="divided">/</option>
+      </select>
+      <input name="number2" class="number"></input>
+      <select name="operator">
+        <option value="==">==</option>
+        <option value=">">></option>
+        <option value="<"><</option>
+      </select>
+      <input name="result" class="number"></input>
+      <input type="submit" value="提交">
     </form>
+    <script>
+    document.getElementById('arishemForm').addEventListener('submit', function(event) { 
+      event.preventDefault();
+      const jsonData = {
+        OpLogic: "&&",
+        Conditions: [
+          {
+            Operator: document.querySelector('select[name="operator"]').value,
+            Lhs: {
+              Const: {
+                NumConst: parseInt(document.querySelector('input[name="number1"]').value, 10)
+              }
+            },
+            Rhs: {
+              Const: {
+                NumConst: parseInt(document.querySelector('input[name="number2"]').value, 10)
+              }
+            }
+          }
+        ]
+      };
+      const jsonString = JSON.stringify(jsonData);
+      fetch('/arishem/post/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: jsonString
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    });
+    </script>
     <style>
     .number {
         width: 30px;

@@ -5,9 +5,9 @@
 - 引擎
 ```shell
 go get github.com/bytedance/arishem@latest
-go get -u ./... # 更新arishem相关的依赖
+go get -u ./... # 运行报错的话需要更新arishem相关依赖
 ```
-- `gin` 热加载工具
+- `gin` 热加载工具, 运行 `air` 命令启动
 ```shell
 go install github.com/air-verse/air@latest
 ```
