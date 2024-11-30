@@ -1,5 +1,25 @@
 <html>
-    <h1>
-        {{ .title }}
-    </h1>
+    <p>这是一个arishem的表单</p>
+    <form action="/arishem/post/">
+        <input name="number1" class="number"></input>
+        <select name="expr">
+          <option value="plus">+</option>
+          <option value="minus">-</option>
+          <option value="multiple">*</option>
+          <option value="divided">/</option>
+        </select>
+        <input name="number2" class="number"></input>
+        <select name="operator">
+          <option value="equal">==</option>
+          <option value="greater">></option>
+          <option value="less"><</option>
+        </select>
+        <input name="result" class="number"></input>
+        <input type="submit" value="提交">
+    </form>
+    <style>
+    .number {
+        width: 30px;
+    }
+    </style>
 </html>
